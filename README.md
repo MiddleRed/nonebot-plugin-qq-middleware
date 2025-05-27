@@ -18,7 +18,7 @@
 
 ## 📖 介绍
 
-用于将用户 QQ 号通过野生 QQ Bot 读取传递给官方 QQ 机器人。
+用于将用户 QQ 号通过第三方 QQ 机器人读取并传递给官方 QQ 机器人。
 
 ## 💿 安装
 本插件仅为概念性验证，强烈建议自行 clone 源码放入机器人插件目录，并根据自己需要修改。  
@@ -28,7 +28,7 @@ pip install git+https://github.com/MiddleRed/nonebot-plugin-qq-middleware
 ```
 
 ## 🎉 使用
-需要官方机器人和野生机器人**在同一个群内时**才生效，私聊无效。可自行实现绑定功能。  
+需要官方机器人和第三方机器人**在同一个群内时**才生效，私聊无效。可自行实现绑定功能。  
 由于用户匹配依赖于获取 `Event` 的时间戳，而目前并没有跨平台的方式能统一获取，因此仅实现了 Onebot V11 协议。可自行修改源码适配其他协议。
 ```python
 from nonebot import on_type, require
@@ -41,7 +41,7 @@ from nonebot_plugin_alconna import UniMessage
 # 依赖注入项，返回 str（匹配成功时的 qq 号）或 None（无匹配）
 from nonebot_plugin_qq_middleware import get_qq_id, GetQQId 
 
-# 是否野生机器人和官方机器人同时在线（Rule）
+# 是否第三方机器人和官方机器人同时在线（Rule）
 from nonebot_plugin_qq_middleware import is_collaborating
 
 # 使用
@@ -63,6 +63,6 @@ async def _(event: QQMessageEvent, qid: GetQQId):
 | 配置项  | 必填  | 默认值 |   说明   |
 | :-----: | :---: | :----: | :------: |
 | QBOT_MIDDLEWARE_OFFICIAL_QBOT_ID   |  是   |   \   | 官方机器人的 **QQ 号** |
-| QBOT_MIDDLEWARE_YASEI_QBOT_ID      |  是   |   \   | 野生机器人的 QQ 号 |
+| QBOT_MIDDLEWARE_YASEI_QBOT_ID      |  是   |   \   | 第三方机器人的 QQ 号 |
 | QBOT_MIDDLEWARE_MATCHING_TIMEOUT   |  否   |   10  | 最大等待匹配时间 |
 | QBOT_MIDDLEWARE_ACCEPTED_THRESHOLD |  否   |  0.5  | 头像匹配相似度，越高容忍度越大|
